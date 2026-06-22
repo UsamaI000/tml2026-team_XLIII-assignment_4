@@ -2,15 +2,17 @@ import os
 import sys
 import requests
 from pathlib import Path
+from dotenv import load_dotenv
 
+load_dotenv()
 
 BASE_URL = "http://34.63.153.158" #donot change
 
-API_KEY  = "YOUR_API_KEY_HERE"  # REPLACE WITH YOUR API KEY
+API_KEY  = os.getenv("API_KEY")  # REPLACE WITH YOUR API KEY
 
 TASK_ID   = "22-forging-task" #donot change
 
-FILE_PATH = Path("PATH/TO/YOUR/ZIP.zip") 
+FILE_PATH = Path("./submission_residual_s7.zip") # REPLACE WITH YOUR FILE PATH
 
 SUBMIT = True # set to True to enable submission
 
