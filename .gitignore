@@ -39,6 +39,7 @@ runlogs/
 Thumbs.db
 
 data/
+submissions/
 
 # removing model and data files
 model.pt
