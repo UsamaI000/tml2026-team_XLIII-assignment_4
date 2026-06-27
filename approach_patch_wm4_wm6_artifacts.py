@@ -85,6 +85,30 @@ PROFILES = {
         peak_strength=0.80, peak_low=0.035, peak_high=0.45, peak_top_fraction=0.006,
         peak_input_sigma=1.0, peak_clip=8.0, final_clip=18.0,
     ),
+    # Combine current best of wm4 and wm6
+    "wm4_edge_wm6_peak": PatchProfile(
+        edge_strength=0.95, edge_width_ratio=0.080, edge_highpass_sigma=0.7, edge_clip=8.0,
+        peak_strength=0.45, peak_low=0.035, peak_high=0.45, peak_top_fraction=0.004,
+        peak_input_sigma=1.0, peak_clip=8.0, final_clip=18.0,
+    ),
+    # Combine current best of wm4 and wm6
+    "wm4_edge_wm6_peak_2": PatchProfile(
+        edge_strength=0.95, edge_width_ratio=0.080, edge_highpass_sigma=0.7, edge_clip=8.0,
+        peak_strength=0.45, peak_low=0.035, peak_high=0.45, peak_top_fraction=0.004,
+        peak_input_sigma=1.0, peak_clip=8.0, final_clip=16.0,
+    ),
+    # Combine current best of wm4 and wm6
+    "wm4_edge_wm6_peak_3": PatchProfile(
+        edge_strength=0.95, edge_width_ratio=0.080, edge_highpass_sigma=0.7, edge_clip=8.0,
+        peak_strength=0.45, peak_low=0.035, peak_high=0.45, peak_top_fraction=0.004,
+        peak_input_sigma=1.0, peak_clip=6.0, final_clip=16.0,
+    ),
+    # Combine current best of wm4 and wm6
+    "wm4_edge_wm6_peak_4": PatchProfile(
+        edge_strength=0.95, edge_width_ratio=0.080, edge_highpass_sigma=0.7, edge_clip=8.0,
+        peak_strength=0.80, peak_low=0.035, peak_high=0.45, peak_top_fraction=0.006,
+        peak_input_sigma=1.0, peak_clip=6.0, final_clip=16.0,
+    ),
 }
 
 
