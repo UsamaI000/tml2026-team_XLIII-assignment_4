@@ -82,6 +82,7 @@ PROFILES: Dict[str, WMConfig] = {
     "wm5_no_freq":     WMConfig(4.0, (4.0,), 0.00, 0.04, 0.20),
     "wm5_freq_mid":    WMConfig(4.0, (2.0,), 0.75, 0.08, 0.30),
     "wm5_freq_narrow": WMConfig(4.0, (2.0,), 0.75, 0.04, 0.16),
+    "wm5_no_freq_sig4": WMConfig(4.0, (4.0,), 0.00, 0.04, 0.20),
     # Strength variants
     "wm5_sig2_s35":    WMConfig(3.5, (2.0,), 0.75, 0.04, 0.20),
     "wm5_sig2_s45":    WMConfig(4.5, (2.0,), 0.75, 0.04, 0.20),
@@ -128,6 +129,7 @@ PROFILES: Dict[str, WMConfig] = {
     "wm8_sig8_s35":    WMConfig(3.5, (8.0,), 0.75, 0.04, 0.20),
     "wm8_sig8_s45":    WMConfig(4.5, (8.0,), 0.75, 0.04, 0.20),
     "wm8_luma":        WMConfig(4.0, (4.0,), 0.75, 0.04, 0.20, channel_mode="luma"),
+    "wm8_sig12":   WMConfig(4.0, (12.0,), 0.75, 0.04, 0.20),
 }
 
 
