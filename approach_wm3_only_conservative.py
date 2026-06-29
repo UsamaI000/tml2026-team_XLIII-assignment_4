@@ -68,6 +68,7 @@ PROFILES: Dict[str, WM3Config] = {
     # Broader residual tests. If WM_3 is more low/mid-frequency, these may help.
     "wm3_sig8": WM3Config(4.0, (8.0,), 0.75, 0.04, 0.20),
     "wm3_sig10": WM3Config(4.0, (10.0,), 0.75, 0.04, 0.20),
+    "wm3_sig12": WM3Config(4.0, (12.0,), 0.75, 0.04, 0.20),
 
     # Frequency diagnostics for WM_3.
     "wm3_no_freq": WM3Config(4.0, (6.0,), 0.00, 0.04, 0.20),
