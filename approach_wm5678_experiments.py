@@ -100,6 +100,7 @@ PROFILES: Dict[str, WMConfig] = {
     "wm6_sig4_s35":    WMConfig(3.5, (4.0,), 0.75, 0.04, 0.20),
     "wm6_sig4_s45":    WMConfig(4.5, (4.0,), 0.75, 0.04, 0.20),
     "wm6_luma":        WMConfig(4.0, (4.0,), 0.75, 0.04, 0.20, channel_mode="luma"),
+    "wm6_sig10":       WMConfig(4.0, (10.0,), 0.75, 0.04, 0.20),
 
     # ── WM_7 profiles ─────────────────────────────────────────────────────────
     # WM7 showed vertical stripe in FFT. very_low dominant (60%).
