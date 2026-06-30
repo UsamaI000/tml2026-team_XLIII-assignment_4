@@ -115,6 +115,9 @@ PROFILES: Dict[str, WMConfig] = {
     "wm7_freq_wide":   WMConfig(4.0, (4.0,), 0.75, 0.03, 0.30),
     "wm7_sig4_s35":    WMConfig(3.5, (4.0,), 0.75, 0.04, 0.20),
     "wm7_sig4_s45":    WMConfig(4.5, (4.0,), 0.75, 0.04, 0.20),
+    "wm7_sig8_s35":  WMConfig(3.5, (8.0,),  0.75, 0.04, 0.20),
+    "wm7_sig8_s45":  WMConfig(4.5, (8.0,),  0.75, 0.04, 0.20),
+    "wm7_sig8_no_freq": WMConfig(4.0, (8.0,), 0.00, 0.04, 0.20),
 
     # ── WM_8 profiles ─────────────────────────────────────────────────────────
     # WM8 similar to WM1/WM3 (very_low dominant). WM3 benefited from sig8.
@@ -131,6 +134,9 @@ PROFILES: Dict[str, WMConfig] = {
     "wm8_sig8_s45":    WMConfig(4.5, (8.0,), 0.75, 0.04, 0.20),
     "wm8_luma":        WMConfig(4.0, (4.0,), 0.75, 0.04, 0.20, channel_mode="luma"),
     "wm8_sig12":   WMConfig(4.0, (12.0,), 0.75, 0.04, 0.20),
+    "wm8_sig10_s35": WMConfig(3.5, (10.0,), 0.75, 0.04, 0.20),
+    "wm8_sig10_s45": WMConfig(4.5, (10.0,), 0.75, 0.04, 0.20),
+    "wm8_sig10_no_freq": WMConfig(4.0, (10.0,), 0.00, 0.04, 0.20),
 }
 
 
