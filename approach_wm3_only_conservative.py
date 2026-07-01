@@ -73,6 +73,7 @@ PROFILES: Dict[str, WM3Config] = {
     "wm3_sig10_s35": WM3Config(3.5, (10.0,), 0.75, 0.04, 0.20),
     "wm3_sig10_s45": WM3Config(4.5, (10.0,), 0.75, 0.04, 0.20),
     "wm3_sig10_s50": WM3Config(5.0, (10.0,), 0.75, 0.04, 0.20),
+    "wm3_sig10_no_freq": WM3Config(4.0, (10.0,), 0.00, 0.04, 0.20),
 
     # Frequency diagnostics for WM_3.
     "wm3_no_freq": WM3Config(4.0, (6.0,), 0.00, 0.04, 0.20),
