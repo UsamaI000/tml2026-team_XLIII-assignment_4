@@ -75,6 +75,8 @@ PROFILES: Dict[str, WM2Config] = {
     "wm2_freq_wide": WM2Config(4.0, (6.0,), 0.75, 0.03, 0.25),
     "wm2_freq_lowmid": WM2Config(4.0, (6.0,), 0.75, 0.02, 0.12),
 
+    "wm2_sig4_no_freq": WM2Config(4.0, (4.0,), 0.00, 0.04, 0.20),
+
     # Aggregation diagnostics.
     "wm2_mean": WM2Config(4.0, (6.0,), 0.75, 0.04, 0.20, aggregation="mean"),
     "wm2_trimmed": WM2Config(4.0, (6.0,), 0.75, 0.04, 0.20, aggregation="trimmed_mean"),
