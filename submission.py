@@ -12,7 +12,7 @@ API_KEY  = os.getenv("API_KEY")  # REPLACE WITH YOUR API KEY
 
 TASK_ID   = "22-forging-task" #donot change
 
-FILE_PATH = Path("./submission_wm2_sig4_no_freq.zip") # REPLACE WITH YOUR FILE PATH
+FILE_PATH = Path("./submission_wm6_sig6_no_freq.zip") # REPLACE WITH YOUR FILE PATH
 
 SUBMIT = True # set to True to enable submission
 
