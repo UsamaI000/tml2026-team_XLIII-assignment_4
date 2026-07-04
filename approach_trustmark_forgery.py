@@ -1,28 +1,33 @@
 #!/usr/bin/env python3
 """
-Real-Scheme Forgery: WM_7 = TrustMark 'Q' variant
-=====================================================
+Real-Scheme Forgery: TrustMark (generalized across WM groups)
+=================================================================
 
-try_trustmark.py found WM_7 decodes with TrustMark's 'Q' variant at PERFECT
-cross-source agreement (all 25 sources -> the exact same 100-bit raw decoder
-output), vs a same-resolution clean-image control baseline of ~0.61 -- the
-strongest signature found in this project (stronger than even WM_1/WM_2).
+try_trustmark.py found:
+  - WM_7 decodes with TrustMark's 'Q' variant at PERFECT cross-source
+    agreement (1.0000, all 25 sources -> the exact same 100-bit raw decoder
+    output) vs a same-resolution clean-image control baseline of ~0.61.
+  - WM_8 decodes with TrustMark's 'P' variant at 0.9988 agreement vs ~0.61
+    control -- equally strong.
+Both are stronger signatures than WM_1 (dwtDct, 0.83) or WM_2 (rivaGan, 0.989).
 
-This recovers that exact 100-bit message and re-encodes it into WM_7's clean
-targets using TrustMark's own real encoder network, bypassing its optional
-BCH error-correction wrapper on both ends (use_ECC=False) so we operate
-directly at the same raw-bit interface used for detection -- not an
+This recovers the exact 100-bit message per group and re-encodes it into that
+group's clean targets using TrustMark's own real encoder network, bypassing
+its optional BCH error-correction wrapper on both ends (use_ECC=False) so we
+operate directly at the same raw-bit interface used for detection -- not an
 approximation of the scheme, the same mechanism.
 
 IMPORTANT: this must run with venv_trustmark's python, not the main venv's
 (trustmark's numpy<2.0 requirement conflicts with the main venv's scipy/
 torchmetrics stack -- see the memory note on this). Example:
     venv_trustmark/Scripts/python.exe approach_trustmark_forgery.py \\
-        --dataset_dir Dataset --base_zip latest_best_results_070.zip \\
-        --out_dir temp_wm7 --zip_out submission_wm7_trustmark.zip --print_psnr
+        --dataset_dir Dataset --base_zip latest_best_results_080.zip \\
+        --wm WM_8 --variant P \\
+        --out_dir temp_wm8 --zip_out submission_wm8_trustmark.zip --print_psnr
 
 Same base_zip-patch convention as every other approach_*.py script here:
-only regenerates WM_7's targets (151-175), copies everything else unchanged.
+only regenerates the target WM group's images, copies everything else
+unchanged.
 """
 
 from __future__ import annotations
@@ -41,7 +46,10 @@ from torchvision import transforms
 from trustmark import TrustMark
 
 EXPECTED_IMAGE_NAMES = {f"{i}.png" for i in range(1, 201)}
-WM7_TARGETS = range(151, 176)
+WM_RANGES = {
+    "WM_1": range(1, 26), "WM_2": range(26, 51), "WM_3": range(51, 76), "WM_4": range(76, 101),
+    "WM_5": range(101, 126), "WM_6": range(126, 151), "WM_7": range(151, 176), "WM_8": range(176, 201),
+}
 
 
 def numeric_key(path: Path) -> int:
@@ -148,39 +156,41 @@ def mean_psnr(clean_dir: Path, out_dir: Path, targets: range) -> float:
 def build_submission(args: argparse.Namespace) -> None:
     dataset_root = ensure_dataset(args.dataset_dir)
     clean_dir = dataset_root / "clean_targets"
-    source_dir = dataset_root / "watermarked_sources" / "WM_7"
+    targets = WM_RANGES[args.wm]
+    source_dir = dataset_root / "watermarked_sources" / args.wm
     source_paths = sorted(source_dir.glob("*.png"), key=numeric_key)
-    if len(source_paths) != 25:
-        raise RuntimeError(f"Expected 25 WM_7 sources, found {len(source_paths)}")
+    if len(source_paths) != len(targets):
+        raise RuntimeError(f"Expected {len(targets)} sources for {args.wm}, found {len(source_paths)}")
 
     print(f"Base ZIP: {args.base_zip}")
     print(f"Loading TrustMark variant {args.variant}...")
     tm = TrustMark(verbose=False, model_type=args.variant)
 
-    print("Recovering majority-vote message from 25 WM_7 sources...")
+    print(f"Recovering majority-vote message from {len(source_paths)} {args.wm} sources...")
     message_bits, agreement = recover_majority_message(tm, source_paths)
     print(f"  cross-source bit agreement = {agreement:.4f}")
 
     extract_base_zip(args.base_zip, args.out_dir)
 
-    print("Encoding recovered message into WM_7 targets (151-175.png)...")
-    encode_targets(tm, clean_dir, WM7_TARGETS, message_bits, args.out_dir)
+    print(f"Encoding recovered message into {args.wm} targets...")
+    encode_targets(tm, clean_dir, targets, message_bits, args.out_dir)
 
-    rt_agreement = round_trip_check(tm, args.out_dir, WM7_TARGETS, message_bits)
+    rt_agreement = round_trip_check(tm, args.out_dir, targets, message_bits)
     print(f"  round-trip decode agreement on freshly forged targets = {rt_agreement:.4f} (should be ~1.0)")
 
     make_flat_zip(args.out_dir, args.zip_out)
     if args.print_psnr:
-        print(f"WM_7 mean PSNR vs clean targets: {mean_psnr(clean_dir, args.out_dir, WM7_TARGETS):.2f} dB")
+        print(f"{args.wm} mean PSNR vs clean targets: {mean_psnr(clean_dir, args.out_dir, targets):.2f} dB")
     print(f"Done: {args.zip_out}")
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Real TrustMark-scheme forgery for WM_7 (single-WM patch)")
+    parser = argparse.ArgumentParser(description="Real TrustMark-scheme forgery (single-WM patch)")
     parser.add_argument("--dataset_dir", type=Path, default=Path("Dataset"))
     parser.add_argument("--base_zip", type=Path, required=True)
     parser.add_argument("--out_dir", type=Path, required=True)
     parser.add_argument("--zip_out", type=Path, required=True)
+    parser.add_argument("--wm", choices=sorted(WM_RANGES), required=True)
     parser.add_argument("--variant", choices=("Q", "P", "C"), default="Q")
     parser.add_argument("--print_psnr", action="store_true")
     return parser

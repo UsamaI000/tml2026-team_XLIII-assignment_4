@@ -1,0 +1,17 @@
+# Isolated environment -- used ONLY for approach_trustmark_forgery.py (WM_7 TrustMark-Q,
+# WM_8 TrustMark-P) and try_trustmark.py.
+#
+# Must be a SEPARATE venv from the main one: trustmark requires numpy<2.0, which
+# conflicts with the main environment's numpy>=2.0 (needed there for scipy/torchmetrics
+# used by evaluate_lpips.py). Installing trustmark into the main venv will silently
+# downgrade numpy and break lpips/pywt/opencv there.
+#
+# Setup:
+#   python -m venv venv_trustmark
+#   venv_trustmark/Scripts/python.exe -m pip install -r requirements_trustmark.txt
+
+numpy==1.26.4
+Pillow==12.3.0
+torch==2.12.1
+torchvision==0.27.1
+trustmark==0.9.1

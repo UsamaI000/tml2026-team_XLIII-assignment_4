@@ -1,0 +1,22 @@
+# Main environment -- used for approach_real_scheme_forgery.py (WM_1 dwtDct, WM_2 rivaGan)
+# and evaluate_lpips.py (optional quality verification).
+# Do NOT install trustmark here -- it requires numpy<2.0, which conflicts with this
+# environment's numpy>=2.0. Use the separate venv_trustmark + requirements_trustmark.txt instead.
+
+numpy==2.5.0
+Pillow==12.2.0
+opencv-python==5.0.0.93
+invisible-watermark==0.2.0
+onnxruntime==1.27.0
+
+# Optional, only needed for evaluate_lpips.py (real LPIPS/Sqlt quality checks,
+# not required to reproduce the forged images themselves). torch/torchvision
+# here were installed from the CPU-only wheel index to avoid a large CUDA
+# download -- use `pip install torch==2.12.1 torchvision==0.27.1
+# --index-url https://download.pytorch.org/whl/cpu` if installing standalone:
+scipy==1.18.0
+PyWavelets==1.9.0
+scikit-learn==1.9.0
+torch==2.12.1
+torchvision==0.27.1
+lpips==0.1.4
