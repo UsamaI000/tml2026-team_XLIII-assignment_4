@@ -66,7 +66,7 @@ leaving everything else untouched:
 ```bash
 # 1. WM_1 -> dwtDct   (main venv)
 venv/Scripts/python.exe approach_real_scheme_forgery.py \
-  --dataset_dir Dataset --base_zip latest_best_result_0466.zip \
+  --dataset_dir Dataset --base_zip latest_best_results_070.zip \
   --out_dir out_wm1 --zip_out step1_wm1.zip \
   --wm WM_1 --method dwtDct --n_bits 32
 
