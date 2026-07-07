@@ -89,15 +89,6 @@ venv_trustmark/Scripts/python.exe approach_trustmark_forgery.py \
   --wm WM_8 --variant P
 ```
 
-`final_submission.zip` is then byte-for-byte identical to
-`latest_best_results_0901.zip`, the actual submitted 0.901033 result
-(verified during development via SHA-256 hash comparison).
-
-Each script prints the recovered message's cross-source bit agreement and a
-round-trip self-decode check (should read close to 1.0) so a failed dataset
-path or wrong environment is caught immediately rather than silently
-producing a bad ZIP.
-
 ## File reference
 
 | File | Role |
